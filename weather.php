@@ -5,7 +5,7 @@ include('lib/forecast.io.php');
 # Uses forecast.io PHP API by https://github.com/tobias-redmann
 
 $api_key = '0743673bd6f1c055452ab6ee2731dcfd'; //forecast.io API key
-$units = 'us';  //units of measurement
+$units = 'us';  //units of measurement 
 $lang = 'en';  //language
 
 #$command = $_POST['command'];   //Slack command name
@@ -22,10 +22,5 @@ $longitude = $zip['lng'];
 $lat = (int) $latitude;
 $long = (int) $longitude;
 
-$geocode = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?address='.$text.'&sensor=true');
-$output = json_decode($geocode);
-
-$location = $output->results[0]->formatted_address;
-
 $condition = $forecast->getCurrentConditions($lat, $long);
-echo $location.'|'.$condition->getTemperature().'|'.$condition->getCloudCover(); //print info to slack
+echo 'Current temperature: '.$condition->getTemperature(); //print info to slack 
